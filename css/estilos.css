@@ -1,0 +1,1559 @@
+:root {
+    color-scheme: light; /* No cambiará nada del CSS en dispositivos oscuros */
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+ /* ===================== CUERPO ===================== */
+
+body {
+    font-family: 'Zen Dots', sans-serif;
+    color: #313030;
+    background-color: #ffffff;
+    font-size: clamp(0.95rem, 1.4vw, 1.1rem); /* Para ajustar el texto dinamicamente según el ancho de la pantalla */
+}
+
+ /* ===================== HEADER ===================== */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed; /* Mantiene el encabezado fijo al hacer scroll */
+    top: 0; 
+    left: 0; 
+    width: 100%;
+    padding: 1.5rem 2rem;
+    /* Filtros para que el contenido que pase por debajo se vea en un tono transparente y difuminado */
+    background-color: rgba(255, 255, 255, 0.75); /* Fondo semitransparente */
+    backdrop-filter: blur(12px); /* Desenfoque del fondo detrás del header */
+    -webkit-backdrop-filter: blur(12px); /* Compatibilidad Safari */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); /* Sombra suave bajo el header */
+    z-index: 10;
+}
+ 
+header h1 {
+    font-family: 'Boldonse', sans-serif;
+    color: #AF8D11;
+    position: absolute; /* Posiciona el título sobre el centro del header */
+    left: 48%; 
+    transform: translateX(-50%); /* Centra exactamente el título */
+    font-size: clamp(1.35rem, 2vw, 2rem); /* Para ajustar el texto dinamicamente según el ancho de la pantalla */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    transition: all 0.3s ease; /* Transición suave para cambios de estilo */
+}
+ 
+header h1:hover {
+    color: black;
+    font-size: clamp(1.55rem, 2.3vw, 2.3rem);
+}
+ 
+/* Div botones */
+.menu-iz,
+.menu-der {
+    display: flex;
+    position: relative;
+}
+
+.menu-iz {
+    width: 50px; 
+    height: 50px;
+}
+
+.menu-der {
+    width: 170px; 
+    height: 50px; 
+    right: 10px;
+}
+ 
+/* Botones */
+.ninja, .maleta {
+    width: 100%; 
+    height: 100%;
+    background-color: transparent; /* Sin fondo para que sea solo icono */
+    border: none; /* Sin borde para que sea solo icono */
+    cursor: pointer; /* Indica que es interactivo */
+    font-size: 3rem;
+    color: blue;
+    transition: all 0.3s ease; /* Transición suave para cambios de estilo */
+}
+ 
+.ninja:hover,
+.maleta:hover {
+    color: black;
+    font-size: 3.5rem;
+}
+ 
+/* Menús desplegables de los botones */
+nav.contacto,
+nav.experiencia {
+    font-family: 'Boldonse', sans-serif;
+    display: none; /* Ocultas hasta que se activa su clase .show */
+    position: absolute; /* Posicionadas sobre el resto del contenido */
+    top: calc(100% + 0.75rem); /* Se sitúan justo debajo del botón */
+    left: -32px; 
+    min-width: 14rem;
+    padding: 0.8rem;
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo translúcido blanco */
+    backdrop-filter: blur(12px); /* Desenfoque del contenido detrás */
+    -webkit-backdrop-filter: blur(12px); /* Compatibilidad Safari */
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 24px 55px rgba(0, 0, 0, 0.50); /* Sombra pronunciada para profundidad */
+    z-index: 20;
+}
+ 
+/* Menús desplegables del boton derecho */
+nav.experiencia {
+    left: auto;
+    right: 22px; 
+}
+ 
+/* Menús desplegados */
+nav.contacto.show,
+nav.experiencia.show {
+    display: block; /* Muestra los menús cuando tienen la clase .show */
+}
+ 
+/* Listas dentro de los menús */
+nav.contacto ul,
+nav.experiencia ul {
+    display: flex; /* Flexbox para apilar los elementos */
+    flex-direction: column; /* Lista vertical */
+    list-style: none;
+    gap: 0.35rem;
+}
+ 
+/* Items de las listas */
+nav.contacto li,
+nav.experiencia li {
+    padding: 0.8rem 1rem; 
+    border-radius: 0.9rem;
+    background: rgba(255, 255, 255, 0.2); /* Fondo translúcido que resalta */
+    cursor: pointer; /* Indica que es interactivo */
+    transition: all 0.3s ease;
+}
+ 
+nav.contacto li:hover,
+nav.experiencia li:hover {
+    font-size: 1.3rem;
+}
+ 
+/* Enlaces dentro de los items */
+nav.contacto li a,
+nav.experiencia li a {
+    color: #111;
+    text-decoration: none; /* Elimina subrayado de los enlaces */
+}
+ 
+/* Contenido adicional dentro de los items */
+nav.contacto li p.adicional {
+    display: none; /* Texto adicional oculto por defecto */
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 0, 0, 0.15); /* Fondo oscuro semitransparente */
+    border-radius: 0.5rem;
+    color: #333;
+    font-size: 0.9rem;
+}
+ 
+nav.contacto li.show p.adicional {
+    display: block; /* Muestra el texto adicional cuando se activa */
+}
+ 
+
+/* ===================== PRESENTACIÓN ===================== */
+
+/* Descripción y foto */
+.descripcion {
+    display: inline-block; /* Alinea la descripción junto a la imagen */
+    vertical-align: top; /* Asegura que quede alineado en la parte superior */
+    width: 50%;
+    margin-left: 2%;
+    padding: 11rem 0; 
+}
+ 
+/* Subtitulo */
+.descripcion h2 {
+    text-align: start;
+    text-decoration: underline; /* Subraya para destacar la sección */
+    color: #AF8D11;
+    font-size: 1.1rem;
+    margin: 0 10px 10px;
+    transition: font-size 0.3s ease;
+    cursor: pointer;
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+ 
+.descripcion h2:hover {
+    font-size: 1.3rem;
+}
+
+/* Título de la sección */
+.titulo-grande {
+    font-size: 30px;
+    font-family: 'Boldonse', sans-serif;
+    margin: 0 10px 4rem 0;
+    text-align: start; /* Alinea el texto al inicio de su contenedor */
+    text-transform: uppercase; /* Convierte el texto a mayúsculas */
+}
+ 
+.descripcion .titulo-grande {
+    transition: font-size 0.3s ease;
+}
+ 
+.descripcion .titulo-grande:hover {
+    font-size: 32px;
+}
+ 
+/* Línea del medio del titulo */
+.medio {
+    color: blue;
+    font-style: italic; /* Cursiva */
+}
+ 
+/* Párrafo de la sección */
+.descripcion p {
+    color: #313030;
+    margin: 0.75rem 0; /* Espacio vertical entre párrafos */
+    line-height: 1.85; /* Altura de línea para mejorar lectura */
+    text-align: start;
+}
+ 
+/* Párrafos que ocupan mas ancho que los otros*/
+.p1 {
+   width: 98vw; /* Obliga al texto a ser gigante (94% de la pantalla), saltándose el límite del 50%, pero adaptándose si encoges la ventana */
+   max-width: 1390px; /* Evita que en monitores enormes se estire más allá de tu diseño original */
+}
+ 
+/* Línea final */
+.p2 {
+    font-family: 'Boldonse', sans-serif;
+    color: blue;
+    margin-top: 3rem;
+    font-size: 1.1rem; 
+    padding-top: 2px;
+}
+ 
+/* Div de la foto */
+.foto {
+    display: inline-block; /* Permite colocar la imagen junto al texto */
+    vertical-align: top; /* Alinea la imagen con la parte superior del texto */
+    width: 36%;
+    padding: 15rem 3rem;
+}
+ 
+/* Imágen Joel */
+.foto img {
+    width: 120%;
+    margin-left: -20px;
+    border: 3px solid #000;
+    border-radius: 2.5rem;
+    object-fit: cover; /* Asegura que la imagen cubra todo el contenedor sin distorsionarse */
+    transition: transform 0.4s ease; /* Transición suave para el efecto hover */
+}
+ 
+.foto img:hover {
+    transform: scale(1.05);
+}
+
+
+/* ===================== TRABAJOS ===================== */
+
+/* Título de la sección */ 
+.experiencia-titulo {
+   margin: -5rem 0 9rem 30px;
+   text-align: start; /* Alineación inicial para mantener consistencia */
+   border-top: 3px solid rgba(0, 0, 0, 0.1);
+   padding-top: 4rem;
+}
+
+/* Contenedores de cada trabajo */
+.trabajo1,
+.trabajo2,
+.trabajo3 {
+    position: relative; /* Para posicionar los títulos de cada trabajo */
+    padding-top: 2rem;
+    margin-bottom: 4rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.trabajo3 {
+    border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos de cada trabajo */
+.trabajo1 p,
+.trabajo2 p,
+.trabajo3 p {
+    position: absolute; /* Posiciona los títulos sobre las imágenes */
+    margin: 0;
+    font-family: 'Boldonse', sans-serif;
+    font-size: 27px;
+    color: #AF8D11;
+}
+
+.trabajo1 p,
+.trabajo3 p {
+    right: 20px;
+    text-align: right;
+}
+
+.trabajo1 p {
+    top: -6.5rem;
+}
+
+.trabajo2 p {
+    top: -0.5rem;
+    left: 30px;
+    text-align: left;
+}
+
+.trabajo3 p {
+    top: 1rem;
+}
+
+/* Sección de imagen de cada trabajo */
+.trabajo1 .seccion-imagen,
+.trabajo2 .seccion-imagen,
+.trabajo3 .seccion-imagen {
+    width: 50%;
+    margin-bottom: 3.5rem;
+    overflow: hidden; /* Oculta cualquier parte de la imagen que sobresalga del contenedor */
+    border-radius: 1.75rem;
+}
+
+.trabajo1 .seccion-imagen,
+.trabajo3 .seccion-imagen {
+    margin-left: 24px;
+    border: 3px solid #000;
+}
+
+.trabajo1 .seccion-imagen {
+    margin-top: -20px;
+}
+
+.trabajo2 .seccion-imagen {
+    margin-top: 75px;
+    margin-left: 48%;
+}
+
+.trabajo3 .seccion-imagen {
+    width: 47%;
+    margin-top: 5.5rem;
+}
+
+/* Imágenes de cada trabajo */
+.trabajo1 .seccion-imagen img,
+.trabajo2 .seccion-imagen img,
+.trabajo3 .seccion-imagen img {
+    display: block; /* Elimina el espacio inferior que las imágenes suelen tener */
+    object-fit: cover; /* Asegura que la imagen cubra todo el contenedor sin distorsionarse */
+    transition: transform 0.4s ease;
+}
+
+.trabajo2 .seccion-imagen img,
+.trabajo3 .seccion-imagen img {
+    width: 100%;
+}
+
+.trabajo1 .seccion-imagen img {
+    width: 94%;
+    margin-left: 20px;
+}
+
+.trabajo3 .seccion-imagen img {
+    margin-left: 20px;
+    margin-top: 93px;
+}
+
+.trabajo1 .seccion-imagen img:hover,
+.trabajo2 .seccion-imagen img:hover,
+.trabajo3 .seccion-imagen img:hover {
+    transform: scale(1.08);
+}
+
+/* Sección de resumen de cada trabajo */
+.trabajo1 .seccion-resumen,
+.trabajo2 .seccion-resumen,
+.trabajo3 .seccion-resumen {
+    font-family: 'Zen Dots', sans-serif;
+    color: #313030;
+    line-height: 1.85; /* Altura de línea para mejorar lectura */
+    width: 37rem;
+}
+
+.trabajo1 .seccion-resumen,
+.trabajo2 .seccion-resumen,
+.trabajo3 .seccion-resumen {
+    margin-top: 7rem;
+}
+
+.trabajo1 .seccion-resumen,
+.trabajo3 .seccion-resumen {
+    text-align: end;
+}
+
+.trabajo1 .seccion-resumen {
+    font-size: 26px;
+}
+
+.trabajo2 .seccion-resumen {
+    text-align: start;
+    font-size: 24px;
+}
+
+.trabajo3 .seccion-resumen {
+    font-size: 25px;
+}
+
+/* Sección de información de cada trabajo */
+.trabajo1 .seccion-info,
+.trabajo3 .seccion-info {
+    width: 50%;
+    margin-bottom: 1rem;
+}
+
+.trabajo2 .seccion-info {
+    margin-left: auto;
+    padding-right: 2rem;
+    box-sizing: border-box; /* Para que el padding no aumente el ancho total */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.trabajo3 .seccion-info {
+    margin-top: 53px;
+}
+
+/* Títulos de la sección de información de cada trabajo */
+.trabajo1 .seccion-info h2,
+.trabajo2 .seccion-info h2,
+.trabajo3 .seccion-info h2 {
+    color: #AF8D11;
+    font-size: 13px;
+    margin-bottom: 1rem;
+    font-family: 'Boldonse', sans-serif;
+    text-transform: uppercase; /* Convierte el texto a mayúsculas */
+}
+
+.trabajo2 .seccion-info h2 {
+    text-align: right;
+    margin: 0 0 1rem 0;
+}
+
+.trabajo1 .seccion-info h2,
+.trabajo3 .seccion-info h2 {
+    margin-left: 30px;
+    text-align: start;
+    margin-top: -30px;
+}
+
+/* Sección de título de cada trabajo */
+.trabajo1 .seccion-titulo,
+.trabajo3 .seccion-titulo {
+    margin-left: 2rem;
+}
+
+.trabajo1 .seccion-titulo {
+    height: 9rem;
+}
+
+.trabajo2 .seccion-titulo {
+    margin: 0;
+    height: 8rem;
+}
+
+/* Enlace del título de cada trabajo */
+.trabajo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: inherit; /* Hereda el color del texto para que el enlace no cambie de color */
+}
+
+/* Ajustes específicos para cada trabajo */
+.trabajo2 .seccion-titulo .trabajo-link {
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+/* Títulos de cada trabajo */
+.trabajo1 .seccion-titulo .trabajo-link h1,
+.trabajo2 .seccion-titulo .trabajo-link h1,
+.trabajo3 .seccion-titulo .trabajo-link h1 {
+    font-family: 'Boldonse', sans-serif;
+    margin-right: 10px;
+    text-transform: uppercase; /* Convierte el texto a mayúsculas */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.trabajo1 .seccion-titulo .trabajo-link h1 {
+    text-align: start;
+    font-size: 50px;
+    margin-bottom: 9rem;
+    transform-origin: left center; /* El punto de origen para la transformación será el centro izquierdo del texto */
+}
+
+.trabajo2 .seccion-titulo .trabajo-link h1 {
+    font-size: clamp(20px, 4vw, 50px);
+    margin: 0;
+    transform-origin: right center; /* El punto de origen para la transformación será el centro derecho del texto */
+}
+
+.trabajo3 .seccion-titulo .trabajo-link h1 {
+    text-align: start;
+    font-size: 26px;
+    margin-bottom: 4rem;
+    transform-origin: left center; /* El punto de origen para la transformación será el centro izquierdo del texto */
+}
+
+.trabajo1 .seccion-titulo .trabajo-link h1:hover,
+.trabajo2 .seccion-titulo .trabajo-link h1:hover,
+.trabajo3 .seccion-titulo .trabajo-link h1:hover {
+    color: blue;
+}
+
+.trabajo1 .seccion-titulo .trabajo-link h1:hover,
+.trabajo2 .seccion-titulo .trabajo-link h1:hover {
+    transform: scale(1.1);
+}
+
+.trabajo3 .seccion-titulo .trabajo-link h1:hover {
+    transform: scale(1.07);
+}
+
+/* Flechas de cada trabajo */
+.trabajo1 .flecha,
+.trabajo2 .flecha,
+.trabajo3 .flecha {
+    display: inline-block; /* Permite aplicar transformaciones a la flecha sin afectar al texto */
+    font-size: 2.5rem;
+    color: #AF8D11;
+    transition: transform 0.3s ease;
+}
+
+.trabajo1 .flecha {
+    margin-left: 15rem;
+    margin-top: -140px;
+}
+
+.trabajo2 .flecha {
+    margin-right: 7rem;
+}
+
+.trabajo3 .flecha {
+    margin-left: 4rem;
+    margin-top: -63px;
+}
+
+.trabajo1 .seccion-titulo .trabajo-link h1:hover ~ .flecha,
+.trabajo3 .seccion-titulo .trabajo-link h1:hover ~ .flecha {
+    transform: rotate(90deg); /* Rota la flecha 90 grados en sentido horario */
+}
+
+
+/* ===================== BOTÓN DE VUELTA ===================== */
+
+
+/* Contenedor del botón de vuelta */
+.vuelta {
+    display: flex;
+    justify-content: center;
+    margin: 4rem 0;
+}
+ 
+/* Botón de vuelta */
+#explorar-btn {
+    font-family: 'Boldonse', sans-serif;
+    font-size: 1.5rem;
+    padding: 1.2rem 3rem;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 2rem;
+    cursor: pointer;
+    letter-spacing: 0.05em; /* Espaciado entre letras para un efecto más llamativo */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transición suave para cambios de color y tamaño */
+}
+ 
+#explorar-btn:hover {
+    background-color: #AF8D11;
+    transform: scale(1.05);
+}
+ 
+
+/* ===================== HABILIDADES TÉCNICAS ===================== */
+
+
+/* Contenedor de las capacidades técnicas */
+.capacidades {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    margin: 4rem 0;
+}
+ 
+/* Cada bloque de capacidad técnica */
+.capacidades div {
+    padding: 2rem;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+ 
+.capacidades div:last-child {
+    border-right: none;
+}
+
+/* Título de cada bloque de capacidad técnica */
+.capacidades h2 {
+    font-family: 'Boldonse', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    color: #AF8D11;
+    white-space: nowrap; /* Evita que el título se divida en varias líneas */
+}
+
+/* Lista de cada bloque de capacidad técnica */
+.capacidades li {
+    list-style: none;
+    font-family: 'Zen Dots', sans-serif;
+    font-size: 0.9rem;
+    color: #313030;
+    line-height: 2; /* Espacio entre cada habilidad para mejorar la legibilidad */
+}
+ 
+
+/* ===================== FOOTER ===================== */
+
+
+/* Contenedor del footer */
+footer {
+    padding: 1rem;
+    border-top: 3px solid rgba(0, 0, 0, 0.1); /* Línea superior para separar el footer del resto del contenido */
+}
+
+/* Contenedor del título y los enlaces del footer */
+.footer-titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Título del footer */
+.footer-text h1 {
+    font-family: 'Boldonse', sans-serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Subtítulo del footer */
+.footer-text h2 {
+    font-size: 0.75rem;
+    font-weight: normal;
+    color: #313030;
+}
+
+/* Contenedor de los enlaces del footer */
+.footer-enlaces {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+}
+
+/* Enlaces del footer */
+.footer-enlaces a {
+    color: inherit; /* Hereda el color del texto para mantener la coherencia visual */
+    text-decoration: none;
+    font-size: 2rem;
+}
+ 
+.footer-enlaces a:hover {
+    color: #AF8D11;
+}
+
+ 
+/* ===================== RESPONSIVE ===================== */
+ 
+
+@media (max-width: 1400px) {
+ 
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden; /* Evita que aparezca una barra de desplazamiento horizontal por cualquier elemento que se salga del ancho de la pantalla */
+    }
+ 
+    header h1 {
+        font-size: clamp(1rem, 2vw, 1.5rem);
+    }
+ 
+    .ninja, .maleta {
+        font-size: 2.5rem;
+    }
+ 
+    .descripcion {
+        width: 100%;
+        box-sizing: border-box; /* Para que el padding no aumente el ancho total y no cause desbordamiento */
+        padding-left: 1rem;
+        padding-right: 2rem;
+        overflow-x: hidden;
+    }
+ 
+    .descripcion p {
+        width: 100%;
+        box-sizing: border-box;
+        white-space: normal; /* Obligamos a saltar de línea */
+        overflow-wrap: break-word; /* Tijeras para palabras largas */
+        word-break: break-word; /* Rompe palabras largas para evitar desbordamiento */
+    }
+ 
+    /* Domamos el hover del h2 (SOBRE MÍ) para que no crezca tanto */
+    .descripcion h2:hover {
+        font-size: 1.15rem;
+    }
+ 
+    /* Evitamos el salto gigante del h1 (DISEÑADOR Y PROGRAMADOR...) */
+    .descripcion .titulo-grande:hover {
+        font-size: 26px;
+    }
+
+    /* Ajuste perfecto para la foto en tablets grandes/portátiles */
+    .descripcion .foto {
+        display: block; /* Le quita el comportamiento de texto y elimina el hueco fantasma inferior */
+        margin: 0 auto 1.5rem;
+    }
+ 
+    .foto {
+        display: block;
+        width: 60%;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+ 
+    .foto img {
+        width: 100%;
+        margin-left: 0;
+    }
+ 
+    .titulo-grande {
+        font-size: 24px;
+    }
+ 
+    .experiencia-titulo {
+        margin-top: 2rem;
+        font-size: 24px;
+    }
+
+    
+ 
+    /* ====== INICIO DEL ARREGLO DE LOS TRABAJOS ====== */
+
+
+    .trabajo1,
+    .trabajo2,
+    .trabajo3 {
+       display: flex;
+       flex-direction: column; /* Cambia a diseño vertical para apilar los elementos */
+       gap: 2rem;
+    }
+
+    .trabajo1 {
+       margin-top: -8rem;
+    }
+    
+    /* Ajustamos los títulos de cada trabajo para que se posicionen correctamente en el nuevo diseño vertical */
+    .trabajo1 > p:first-of-type, /* Selecciona el primer párrafo (título) de cada trabajo */
+    .trabajo2 > p:first-of-type,
+    .trabajo3 > p:first-of-type {
+       position: static; /* Cambia a posición estática para que se comporte como un elemento normal dentro del flujo del documento */
+       order: 1; /* Asegura que el título sea el primer elemento dentro del contenedor del trabajo */
+       font-size: 28px;
+       text-align: start;
+       margin: 1rem 0 0 1.5rem;
+    }
+
+    .trabajo1 .seccion-imagen,
+    .trabajo2 .seccion-imagen,
+    .trabajo3 .seccion-imagen {
+       width: 90%;
+       margin: 0 auto; /* Centra la imagen horizontalmente */
+       order: 2;
+    }
+
+    .trabajo1 .seccion-imagen img,
+    .trabajo2 .seccion-imagen img,
+    .trabajo3 .seccion-imagen img {
+       border-radius: 1.75rem;
+       margin: 0;
+       width: 100%;
+    }
+
+    .trabajo1 .seccion-imagen img:hover{
+        transform: scale(1.03);
+    }
+
+    .trabajo1 p.seccion-resumen,
+    .trabajo2 p.seccion-resumen,
+    .trabajo3 p.seccion-resumen {
+       position: static; /* Cambia a posición estática para que se comporte como un elemento normal dentro del flujo del documento */
+       order: 3;
+       width: 90%;
+       font-size: 20px;
+       margin: 0 auto;
+       text-align: start;
+    }
+
+    .trabajo1 .seccion-info,
+    .trabajo2 .seccion-info,
+    .trabajo3 .seccion-info,
+    .trabajo1 .seccion-titulo,
+    .trabajo2 .seccion-titulo {
+       position: static;
+       width: 90%;
+       order: 4;
+       text-align: left;
+    }
+
+    .trabajo1 .seccion-info,
+    .trabajo1 .seccion-titulo {
+       margin: 0 auto;
+    }
+
+    .trabajo3 .seccion-info {
+       width: 100%;
+       margin: 0;
+       padding-left: 4rem;
+       box-sizing: border-box; /* Para que el padding no aumente el ancho total */
+       align-items: flex-start; /* Alinea el contenido al inicio del contenedor */
+    }
+
+    .trabajo1 .seccion-info h2,
+    .trabajo2 .seccion-info h2,
+    .trabajo3 .seccion-info h2 {
+       margin-top: 1rem;
+       margin-left: 0;
+       text-align: start;
+    }
+
+    .trabajo1 .seccion-titulo {
+       height: 5rem;
+    }
+
+    .trabajo3 .seccion-titulo {
+       margin: 0;
+    }
+
+    .trabajo1 .seccion-titulo .trabajo-link h1,
+    .trabajo2 .seccion-titulo .trabajo-link h1,
+    .trabajo3 .seccion-titulo .trabajo-link h1 {
+       white-space: normal; /* Permite que el texto se divida en varias líneas si es necesario */
+    }
+
+    .trabajo2 .seccion-titulo .trabajo-link h1,
+    .trabajo3 .seccion-titulo .trabajo-link h1 {
+       margin-left: 0;
+       text-align: start;
+    }  
+
+    .trabajo1 .seccion-titulo .trabajo-link h1 {
+       font-size: 30px;
+       margin-top: -2rem;
+       margin-bottom: 1rem;
+    }
+
+    .trabajo2 .seccion-titulo .trabajo-link h1 {
+       font-size: 28px;
+    }
+ 
+    .trabajo3 .seccion-titulo .trabajo-link h1 {
+       font-size: 22px;
+    }
+
+    .trabajo3 .seccion-titulo .trabajo-link {
+       justify-content: flex-start;
+    }
+
+    .trabajo1 .flecha {
+       margin-left: 3rem;
+       margin-top: -3rem;
+    }
+
+    .trabajo2 .flecha {
+       margin-left: 1rem;
+       margin-top: 0;
+    }
+
+    .trabajo3 .flecha {
+       margin-right: 3rem;
+       margin-top: -4rem;
+    }
+
+    .capacidades {
+        grid-template-columns: repeat(2, 1fr); /* Cambia a 2 columnas para que cada bloque de capacidad técnica ocupe más espacio y se adapte mejor a pantallas más pequeñas */
+    }
+ 
+    .capacidades div {
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+ 
+    .capacidades h2 {
+        white-space: normal; /* Permite que el título se divida en varias líneas si es necesario */
+    }
+}
+ 
+ 
+/* 2. NUEVAS REGLAS PARA TABLET VERTICAL (Hasta 768px) */
+@media (max-width: 768px) {
+
+    header h1 {
+        font-size: 1rem;
+        margin-left: -22px;
+    }
+
+    header h1:hover {
+        font-size: 1.20rem;
+    }
+
+    .ninja, .maleta {
+        font-size: 2rem;
+    }
+
+    .ninja:hover,
+    .maleta:hover {
+        font-size: 2.6rem;
+    }
+
+    .descripcion {
+        display: block; /* Cambia a bloque para que la descripción ocupe toda la anchura disponible */
+        width: 90%;
+        margin: 0 auto;
+        padding: 8rem 0 2rem; /* Ajusta el padding para que haya espacio suficiente en la parte superior e inferior */
+    }
+
+    .foto {
+        width: 70%;
+        padding: 2rem 0;
+    }
+
+    nav.experiencia {
+        right: 15px;
+    }
+
+    .titulo-grande {
+        font-size: 22px;
+    }
+
+    .descripcion .titulo-grande:hover {
+        font-size: 23px;
+    }
+
+    .trabajo1 p, .trabajo2 p, .trabajo3 p {
+        margin-left: 5%;
+        margin-bottom: 1.5rem;
+        text-align: left;
+    }
+
+    .trabajo1 .seccion-imagen img:hover {
+        transform: scale(1.03);
+    }
+
+    .trabajo2 .seccion-info,
+    .trabajo3 .seccion-info {
+        width: 100%;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .trabajo2 .seccion-info {
+        align-items: flex-end;
+        padding-right: 2rem;
+    }
+
+    .trabajo2 .flecha {
+        margin-right: 2rem;
+        margin-left: 1rem;
+    }
+
+    .trabajo2 .seccion-titulo .trabajo-link h1 {
+        white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+        font-size: 22px;
+    }
+
+    .trabajo3 .seccion-info {
+        padding-left: 2rem;
+        align-items: flex-start; /* Alinea el contenido al inicio del contenedor */
+    }
+
+    .footer-titulo {
+        flex-direction: column-reverse; /* Cambia a diseño vertical para apilar el título y los enlaces */
+        text-align: center;
+        gap: 1.5rem;
+    }
+
+    .footer-enlaces {
+        justify-content: center;
+        width: 100%;
+    }
+}
+ 
+/* 3. NUEVAS REGLAS PARA MÓVIL (Hasta 480px) */
+@media (max-width: 480px) {
+
+    header h1 {
+        font-size: 0.8rem;
+        margin-left: -23px;
+    }
+
+    header h1:hover {
+        font-size: 0.87rem;
+    }
+
+    .ninja, .maleta {
+        font-size: 1.8rem;
+    }
+
+    .ninja {
+        margin-right: 2rem;
+    }
+
+    .maleta {
+        margin-left: 2rem;
+    }
+
+    .ninja:hover, .maleta:hover {
+        font-size: 2rem;
+    }
+
+    nav.contacto {
+        min-width: 85vw; /* Asegura que el menú desplegable ocupe la mayor parte del ancho de la pantalla, pero dejando un pequeño margen a los lados para que no se pegue completamente al borde */
+        left: -30px;
+    }
+
+    nav.experiencia {
+        min-width: 85vw; /* Asegura que el menú desplegable ocupe la mayor parte del ancho de la pantalla, pero dejando un pequeño margen a los lados para que no se pegue completamente al borde */
+    }
+
+    .descripcion {
+        width: 100%;
+        box-sizing: border-box; /* Para que el padding no aumente el ancho total y no cause desbordamiento */
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        overflow-x: hidden;
+    }
+
+    .descripcion p {
+        margin-bottom: 1rem;
+    }
+
+    .foto {
+        width: 90%;
+    }
+
+    .trabajo1 .seccion-titulo .trabajo-link h1 {
+        font-size: 22px;
+    }
+
+    .trabajo3 .seccion-titulo .trabajo-link h1 {
+        font-size: 20px;
+        margin-left: -20px;
+    }
+
+    .trabajo2 .seccion-info {
+        align-items: flex-end; /* Alinea el contenido al final del contenedor para que quede a la derecha */
+        padding-right: 1.5rem;
+    }
+
+    .trabajo2 .seccion-info h2 {
+        margin-top: 1rem;
+        margin-left: 1rem;
+        text-align: start;
+    }
+
+    .trabajo2 .seccion-titulo .trabajo-link h1 {
+        font-size: 20px;
+        white-space: nowrap;
+    }
+
+    .trabajo3 .seccion-info h2 {
+        margin-left: -19px;
+    }
+
+    .trabajo2 .flecha {
+        margin-right: 2rem;
+    }
+
+    .trabajo3 .flecha {
+        margin-left: 4rem;
+        margin-top: -4rem;
+    }
+
+    #explorar-btn {
+        font-size: 1.1rem;
+        padding: 0.8rem 2rem;
+    }
+
+    #explorar-btn:hover {
+        transform: scale(1.02);
+    }
+
+    .capacidades {
+        grid-template-columns: 1fr; /* Cambia a una sola columna para que cada bloque de capacidad técnica ocupe toda la anchura disponible y se adapte mejor a pantallas pequeñas */
+    }
+
+    .trabajo1 .seccion-imagen img:hover {
+        transform: scale(1.03);
+    }
+}
+
+/* ===================== GALERÍA CABECERA ===================== */
+
+/* Sección del titulo y subtitulo */
+.galeria-cabecera {
+    margin-top: 8rem; 
+}
+
+/* Subtitulo de la sección */
+.galeria-subtitulo {
+    font-family: 'Zen Dots', sans-serif;
+    font-size: 0.95rem;
+    color: #313030;
+    margin-left: 32px;
+    margin-bottom: 3rem;
+    margin-top: -8rem;
+}
+
+/* ===================== GRID DE VÍDEOS ===================== */
+
+/* Sección de toda la galería */
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    padding: 0 2rem 4rem;
+}
+
+/* Miniatura de Tiktok, link o youtube */
+.video-card {
+    cursor: pointer; /* Indica que la tarjeta es clicable */
+    border-radius: 1rem;
+    overflow: hidden; /* Oculta lo que sobresalga de la tarjeta */
+}
+
+/* Contenedor de la miniatura */
+.video-thumb {
+    position: relative; /* Permite posicionar el icono de play encima */
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Proporción estándar de vídeo horizontal */
+    background-color: #111; 
+    border-radius: 1rem;
+    overflow: hidden; /* Oculta lo que sobresalga */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave en hover */
+}
+
+/* imagen del contenedor */
+.video-thumb img {
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; /* Recorta la imagen para que cubra sin distorsionarse */
+    display: block; /* Elimina el espacio inferior que tienen las imágenes por defecto */
+    transition: opacity 0.3s ease; /* Transición suave al bajar la opacidad en hover */
+}
+
+/* hover de la miniatura y contenedor*/
+.video-card:hover .video-thumb {
+    transform: scale(1.03);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada en hover */
+}
+
+/* hover de la miniatura y de la imagen del contenedor */
+.video-card:hover .video-thumb img {
+    opacity: 0.75; /* Oscurece la miniatura al pasar el ratón para que resalte el icono de play */
+}
+
+/* Icono de play o tiktok encima de la miniatura */
+.play-overlay {
+    position: absolute; /* Se posiciona sobre la miniatura */
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); /* Ajuste fino para centrarlo perfectamente */
+    font-size: 2.5rem;
+    color: white;
+    opacity: 0; /* Oculto por defecto, aparece en hover */
+    transition: opacity 0.3s ease; /* Transición suave al aparecer */
+    pointer-events: none; /* Evita que el icono intercepte los clics */
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* hover para mostrar el icono */
+.video-card:hover .play-overlay {
+    opacity: 1; /* Muestra el icono de play al pasar el ratón */
+}
+
+/* Título debajo de la miniatura */
+.video-titulo {
+    font-family: 'Zen Dots', sans-serif;
+    font-size: 0.8rem;
+    color: #313030;
+    padding: 0.6rem 0.25rem 0;
+    white-space: nowrap; /* Evita que el título se parta en varias líneas */
+    overflow: hidden; /* Oculta el texto que sobresalga */
+    text-overflow: ellipsis; /* Añade "..." al final si el título es demasiado largo */
+}
+
+/* ===================== MODAL ===================== */
+
+/* La modal del vídeo elegido abierta */
+.modal-overlay {
+    display: none; /* Oculto por defecto, se muestra al añadir la clase .show */
+    position: fixed; /* Cubre toda la pantalla sin moverse con el scroll */
+    inset: 0; /* Equivale a top/right/bottom/left: 0, ocupa toda la pantalla */
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px); /* Desenfoque del contenido detrás del modal */
+    -webkit-backdrop-filter: blur(8px); /* Compatibilidad con Safari */
+    z-index: 100; /* Por encima de todo el resto del contenido */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Muestra el modal al añadir la clase .show desde JS */
+.modal-overlay.show {
+    display: flex;
+}
+
+/* Caja que contiene las flechas, el iframe y la x de cierre */
+.modal-contenido {
+    display: flex; /* Coloca las flechas y el vídeo en fila */
+    align-items: center;
+    gap: 1.5rem;
+    width: 90%;
+    max-width: 960px; /* Límite máximo para pantallas grandes */
+}
+
+/* Contenedor del Iframe del vídeo */
+.modal-iframe-contenedor {
+    flex: 1; /* Ocupa todo el espacio disponible entre las flechas */
+    aspect-ratio: 16 / 9; /* Proporción estándar de vídeo horizontal */
+    border-radius: 1rem;
+    overflow: hidden; /* Oculta lo que sobresalga */
+    background-color: #000;
+}
+
+/* Oculta el contenedor de YouTube cuando se muestra TikTok */
+.modal-iframe-contenedor.oculto {
+    display: none; 
+}
+
+/* Iframe del video */
+.modal-iframe-contenedor iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Flechas de navegación */
+.modal-flecha {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer; /* Indica que es clicable */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, transform 0.2s ease; /* Transición suave en hover */
+    flex-shrink: 0; /* Evita que las flechas se encojan si el vídeo es muy grande */
+}
+
+/* Hover de flechas */
+.modal-flecha:hover {
+    background: #AF8D11;
+    transform: scale(1.1);
+}
+
+/* Botón cerrar */
+.modal-cerrar {
+    position: absolute; /* Se posiciona sobre el modal */
+    top: 1.5rem;
+    right: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer; /* Indica que es clicable */
+    display: flex; /* Para centrar el icono dentro del botón */
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, transform 0.2s ease; /* Transición suave en hover */
+}
+
+/* hover del boton de cerrar */
+.modal-cerrar:hover {
+    background: #AF8D11;
+    transform: scale(1.1);
+}
+
+/* Título del vídeo en el modal */
+.modal-titulo-video {
+    font-family: 'Boldonse', sans-serif;
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+    letter-spacing: 0.05em; /* Espaciado entre letras para mejor legibilidad */
+}
+
+/* ===================== MODAL TIKTOK ===================== */
+
+/* contenedor de los vídeos de tiktok en la modal */
+.modal-tiktok {
+    display: none; /* Oculto por defecto, se muestra al añadir la clase .activo */
+    flex: 1; /* Ocupa el espacio disponible igual que el contenedor de YouTube */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+/* Muestra el contenedor TikTok al añadir la clase .activo desde JS */
+.modal-tiktok.activo {
+    display: flex;
+}
+
+/* Contenedor de la miniatura del vídeo de tiktok */
+.modal-tiktok-thumb {
+    width: 100%;
+    max-width: 340px;
+    aspect-ratio: 9 / 16; /* Proporción vertical característica de TikTok */
+    border-radius: 1rem;
+    overflow: hidden; /* Oculta lo que sobresalga */
+    position: relative; /* Para posicionar el overlay y el icono encima */
+    margin-top: 60px;
+}
+
+/* imagen de la miniatura del vídeo de tiktok en la modal */
+.modal-tiktok-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorta la imagen para que cubra sin distorsionarse */
+    display: block; /* Elimina el espacio inferior por defecto */
+}
+
+/* Icono de TikTok encima de la miniatura */
+.modal-tiktok-thumb::after {
+    content: ''; /* Necesario para que el pseudo-elemento aparezca */
+    position: absolute; /* Se posiciona sobre la miniatura */
+    inset: 0; /* Cubre toda la miniatura */
+    background-color: rgba(0, 0, 0, 0.35);
+    border-radius: 1rem;
+}
+
+/* icono de tiktok */
+.modal-tiktok-icono {
+    position: absolute; /* Se posiciona sobre la miniatura */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Ajuste fino para centrarlo perfectamente */
+    font-size: 4rem;
+    color: white;
+    z-index: 1; /* Por encima del overlay oscuro */
+    pointer-events: none; /* Evita que el icono intercepte los clics */
+}
+
+/* Botón ver en TikTok */
+.modal-tiktok-btn {
+    font-family: 'Boldonse', sans-serif;
+    font-size: 1rem;
+    color: white;
+    background-color: #000;
+    border: 2px solid white;
+    border-radius: 2rem;
+    padding: 0.8rem 2rem;
+    cursor: pointer; /* Indica que es clicable */
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Transición suave en hover */
+}
+
+/* hover botón ver en tiktok */
+.modal-tiktok-btn:hover {
+    background: #AF8D11;
+    border-color: #AF8D11;
+}
+
+/* Miniaturas TikTok en vertical en la modal */
+.video-card[data-type="tiktok"] .video-thumb {
+    aspect-ratio: 5 / 6; /* Proporción más vertical para las tarjetas de TikTok en la galería */
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (max-width: 1400px) {
+    .galeria-grid {
+        grid-template-columns: repeat(3, 1fr); /* Reduce a 3 columnas */
+    }
+    .galeria-cabecera h1 {
+        margin-top: -4rem; /* Ajusta el margen del título en pantallas medianas */
+    }
+}
+
+@media (max-width: 768px) {
+    .galeria-grid {
+        grid-template-columns: repeat(2, 1fr); /* Reduce a 2 columnas en tablets */
+        padding: 0 1rem 3rem; /* Reduce el padding lateral en tablets */
+    }
+
+    .modal-contenido {
+        width: 95%; /* Más ancho en pantallas pequeñas para aprovechar espacio */
+        gap: 0.75rem; /* Reduce el espacio entre flechas y vídeo */
+    }
+
+    .modal-flecha {
+        font-size: 1.5rem; /* Reduce el tamaño del icono de las flechas */
+        width: 40px; /* Reduce el ancho del botón */
+        height: 40px; /* Reduce el alto del botón */
+    }
+}
+
+@media (max-width: 480px) {
+    .galeria-grid {
+        grid-template-columns: 1fr; /* Una sola columna en móvil */
+    }
+
+    .modal-flecha {
+        font-size: 1.2rem; /* Reduce más el icono en móviles pequeños */
+        width: 34px; /* Reduce más el ancho en móviles pequeños */
+        height: 34px; /* Reduce más el alto en móviles pequeños */
+    }
+}
+
+
+/* ===================== HTML ESTUDIOS ===================== */
+
+/* sección trabajo1 y trabajo2 del html estudios */
+.pagina-estudios .trabajo1,
+.pagina-estudios .trabajo2{
+    padding-top: 1rem;
+}
+
+/* sección trabajo3 del html estudios */
+.pagina-estudios .trabajo3 {
+    border-bottom: 0;
+    margin-bottom: -3rem;
+    top: -2rem;
+}
+
+/* el año de la sección trabajo2 */
+.pagina-estudios .trabajo2 p {
+    top: -2.5rem;
+}
+
+/* el título de la página estudios */
+.pagina-estudios .experiencia-titulo{
+    padding-top: 13rem;
+}
+
+/* las img de trabajo1 y 2 */
+.pagina-estudios .trabajo1 .seccion-imagen img,
+.pagina-estudios .trabajo2 .seccion-imagen img{
+    width: 121%;
+    margin-left: -75px;
+}
+
+/* la imagen de trabajo3 */
+.pagina-estudios .trabajo3 .seccion-imagen img{
+    margin-left: 0px;
+    margin-top: 0px;
+}
+
+/* título de trabajo2 */
+.pagina-estudios .trabajo2 .seccion-titulo .trabajo-link h1 {
+    color: #000;
+}
+
+/* hover del título de trabajo2 */
+.pagina-estudios .trabajo2 .seccion-titulo .trabajo-link h1:hover {
+    color: blue;
+}
+
+/* sección imágen de trabajo2 y 3 */
+.pagina-estudios .trabajo2 .seccion-imagen, .trabajo3 .seccion-imagen {
+    border: 3px solid #000;
+}
+
+/* sección resumen de trabajo1 */
+.pagina-estudios .trabajo1 .seccion-resumen{
+    font-size: 25px;
+}
+
+/* sección resumen de trabajo1 */
+.pagina-estudios .trabajo3 .seccion-resumen {
+    font-size: 23px;
+}
+
+@media (max-width: 1400px) {
+    .pagina-estudios .experiencia-titulo {
+        padding-top: 6rem; 
+    }
+
+    .pagina-estudios .trabajo1 .seccion-imagen img,
+    .pagina-estudios .trabajo2 .seccion-imagen img {
+        width: 130%; /* Aumentamos el tamaño para que desborde el cuadro */
+        margin-left: -15%; /* La centramos para ocultar los bordes de la foto */
+    }
+
+    .pagina-estudios .trabajo3 .seccion-imagen img {
+        width: 150%;
+        margin-left: -25%;
+        margin-top: -5%;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .pagina-estudios .trabajo1 .seccion-imagen img,
+    .pagina-estudios .trabajo2 .seccion-imagen img {
+        width: 140%; 
+        margin-left: -20%;
+    }
+
+    .pagina-estudios .trabajo3 .seccion-imagen img {
+        width: 160%;
+        margin-left: -30%;
+    }
+
+    .pagina-estudios .trabajo2 .seccion-info h2 {
+        align-self: flex-end; /* Empuja la caja del h2 a la derecha del todo ignorando al padre */
+        text-align: right; /* Hace que las letras se apoyen a la derecha cuando saltan de línea */
+        width: 100%; /* Le damos todo el ancho para que el salto de línea quede natural */
+    }
+}
+
+@media (max-width: 480px) {
+
+    .pagina-estudios .trabajo1 .seccion-imagen img,
+    .pagina-estudios .trabajo2 .seccion-imagen img {
+        width: 150%; 
+        margin-left: -25%;
+    }
+
+    .pagina-estudios .trabajo3 .seccion-imagen img {
+        width: 180%;
+        margin-left: -40%;
+    }
+}
