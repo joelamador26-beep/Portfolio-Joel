@@ -55,6 +55,7 @@ function abrirModal(indice) {
 
     modal.classList.add('show');
     document.body.style.overflow = 'hidden'; // Bloquea el scroll de la página mientras el modal está abierto
+    document.documentElement.style.overflow = 'hidden';
 }
 
 // Cierra el modal y detiene el vídeo
@@ -64,6 +65,7 @@ function cerrarModal() {
     tiktokContenedor.classList.remove('activo');
     youtubeContenedor.classList.remove('oculto');
     document.body.style.overflow = ''; // Restaura el scroll de la página
+    document.documentElement.style.overflow = '';
 }
 
 // Navega al vídeo anterior
