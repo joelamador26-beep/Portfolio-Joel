@@ -1072,7 +1072,7 @@ footer {
     .trabajo2 .seccion-info h2 {
         margin-top: 1rem;
         margin-left: 1rem;
-        text-align: start;
+        text-align: end;
     }
 
     .trabajo2 .seccion-titulo .trabajo-link h1 {
