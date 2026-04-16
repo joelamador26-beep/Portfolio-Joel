@@ -89,7 +89,7 @@ const scrollLinks = [
 ];
 
 scrollLinks.forEach(({ origen, destino }) => {
-    origen?.addEventListener('click', function () {
+    origen.addEventListener('click', function () {
         const headerAltura = document.querySelector('header').offsetHeight;
         const posicion = destino.getBoundingClientRect().top + window.scrollY - headerAltura;
         window.scrollTo({ top: posicion, behavior: 'smooth' }); // Desplaza suavemente hasta la posición calculada
